@@ -1,0 +1,69 @@
+<div class="p-grid">
+    <div class="p-col-12">
+        <p-toast></p-toast>
+        <div class="card">
+            <p-toolbar styleClass="p-mb-4">
+                <ng-template pTemplate="left">
+                    <button pButton pRipple label="Envoyer un message" icon="pi pi-plus" class="p-button-success p-mr-2 p-mb-2" (click)="openCreate()"></button>
+                    <!--  <button pButton pRipple label="Supprimer" icon="pi pi-trash" class="p-button-danger p-mb-2" (click)="deleteMultiple()" [disabled]="!selectes || !selectes.length"></button>-->
+                </ng-template>
+
+                <ng-template pTemplate="right">
+                    <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Importer" class="p-mr-2 p-mb-2 p-d-inline-block"></p-fileUpload>
+                    <button pButton pRipple label="Exporter" icon="pi pi-upload" class="p-button-help p-mb-2" (click)="dt.exportCSV()"></button>
+                </ng-template>
+            </p-toolbar>
+
+            <p-table #dt [value]="items" [columns]="cols" [rows]="4" [paginator]="true" [globalFilterFields]="['dateDepart','dateFin','etatDemandeConfeLibelle','msgColl','action']"
+                     [(selection)]="selectes" [rowHover]="true" dataKey="id"
+                     styleClass="p-datatable-customers"
+                     currentPageReportTemplate="Affichage de  {first} à {last} sur {totalRecords} entrées" [showCurrentPageReport]="true">
+                <ng-template pTemplate="caption">
+                    <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
+                        <h5 class="p-m-0">Liste des messages</h5>
+                        <span   class="p-input-icon-left">
+                       <i class="pi pi-search" ></i>
+                        <input pInputText type="text"  placeholder="Rechercher..." />
+                    </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+                        <th pSortableColumn="collaborateur">Collaborateur <p-sortIcon field="collaborateur"></p-sortIcon></th>
+                        <th pSortableColumn="etatMessage">Etat Message <p-sortIcon field="etatMessage"></p-sortIcon></th>
+                        <th pSortableColumn="objet">Objet <p-sortIcon field="objet"></p-sortIcon></th>
+                        <th pSortableColumn="action">Actions<p-sortIcon field="action"></p-sortIcon></th>
+                        <th></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-message>
+                    <tr>
+                        <td>
+                            <p-tableCheckbox [value]="message"></p-tableCheckbox>
+                        </td>
+                        <td>{{message.source.nom}} {{message.source.prenom}}</td>
+                        <td>{{message.etatMessage.libelle}}</td>
+                        <td>{{message.objet}}</td>
+
+                        <td>
+                            <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-info p-mr-2" (click)="view(message)"></button>
+                            <!-- <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="delete(demandeConge)"></button>-->
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="summary">
+                    <div class="p-d-flex p-ai-center p-jc-between">
+                        Au total il y a {{items ? items.length : 0 }} éléments.
+                    </div>
+                </ng-template>
+            </p-table>
+        </div>
+
+        <app-collaborateur-create-message></app-collaborateur-create-message>
+        <app-collaborateur-view-message></app-collaborateur-view-message>
+        <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+    </div>
+</div>

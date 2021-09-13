@@ -1,0 +1,34 @@
+<p-dialog [(visible)]="viewDialog" [style]="{width: '950px'}" header="Les Détails " [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <div class="p-grid">
+            <div class="p-field p-sm-6">
+                <label for="objet">source Nom</label>
+                <input type="text" pInputText id="sourcename" [(ngModel)]="selected.message.source.nom" disabled />
+            </div>
+            <div class="p-field p-sm-6">
+                <label for="sourceemail">Source email</label>
+                <input type="text" pInputText id="sourceemail" [(ngModel)]="selected.message.source.login" disabled />
+            </div>
+        </div>
+
+
+        <div class="p-grid">
+            <div class="p-field p-sm-6">
+                <label for="etatMessage">etat Message</label>
+                <input type="text" pInputText id="etatMessage" [(ngModel)]="selected.etatMessage.libelle" disabled />
+            </div>
+            <div class="p-field p-sm-6">
+                <label >Objet</label>
+                <input type="text" pInputText id="objet" [(ngModel)]="selected.message.objet" disabled />
+
+            </div>
+        </div>
+
+        <div class="p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="corps">corps</label>
+                <textarea id="corps" [rows]="5" [cols]="30" pInputTextarea autoResize="autoResize" [(ngModel)]="selected.message.corps" disabled>
+                </textarea>
+            </div>
+
+        </div>

@@ -1,0 +1,56 @@
+<div class="p-panel p-grid p-mt-1">
+    <div class="p-col-12">
+        <div class="card">
+            <h5 class="card-header">Result</h5>
+            <p-table [value]="projetStatistiques" dataKey="name">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem"></th>
+                        <th pSortableColumn="projet.libelle">Projet <p-sortIcon field="projet.libelle"></p-sortIcon></th>
+                        <th pSortableColumn="totalPeriode">TotalPeriode <p-sortIcon field="totalPeriode"></p-sortIcon></th>
+                        <th pSortableColumn="totalHeure">TotalHeures <p-sortIcon field="totalHeure"></p-sortIcon></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-projet let-expanded="expanded">
+                    <tr>
+                        <td>
+                            <button type="button" pButton pRipple [pRowToggler]="projet" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                        </td>
+                        <td>{{projet.projet.libelle}}</td>
+                        <td>{{projet.totalPeriode}}</td>
+                        <td>{{projet.totalHeure}}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="rowexpansion" let-projet>
+                    <tr>
+                        <td colspan="7">
+                            <div class="p-p-3">
+                                <p-table [value]="items.get(projet.id)" dataKey="id">
+                                    <ng-template pTemplate="header">
+                    <tr>
+                        <th pSortableColumn="id">Lot <p-sortIcon field="price"></p-sortIcon></th>
+                        <th pSortableColumn="customer">TotalPeriode<p-sortIcon field="customer"></p-sortIcon></th>
+                        <th pSortableColumn="date">TotalHeures <p-sortIcon field="date"></p-sortIcon></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-detail>
+                    <tr>
+                        <td>{{detail.lot.libelle}}</td>
+                        <td>{{detail.totalPeriode}}</td>
+                        <td>{{detail.totalHeure}}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="6">There are no order for this product yet.</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+        </td>
+        </tr>
+        </ng-template>
+        </p-table>
+    </div>
+    </div>
+</div>

@@ -1,0 +1,66 @@
+<div class="card">
+    <h5>Information du compte</h5>
+    <p-tabView styleClass="tabview-custom">
+        <p-toast></p-toast>
+        <p-tabPanel>
+            <ng-template pTemplate = "header">
+                <span>Profile</span>
+                <i class="pi pi-user"></i>
+            </ng-template>
+            <div class="p-grid">
+                <div class="p-field p-col">
+                    <label>Nom</label>
+                    <input type="text" [(ngModel)]="selected.nom"  disabled pInputText>
+                </div>
+                <div class="p-field p-col">
+                    <label>Prenom</label>
+                    <input type="text" [(ngModel)]="selected.prenom" disabled pInputText>
+                </div>
+                <div class="p-field p-col">
+                    <label>Telephone</label>
+                    <input type="text" [(ngModel)]="selected.phone" disabled pInputText>
+                </div>
+                <div class="p-field p-col">
+                    <label>Identifiant</label>
+                    <input type="text" [(ngModel)]="selected.login" disabled pInputText>
+                </div>
+                <div class="p-field p-col">
+                    <button pButton pRipple type="button" label="Editer" icon="pi pi-pencil" class="p-ml-2 p-mt-4"
+                            (click)="edit(selected)"></button>
+                </div>
+                    <app-edit-profil></app-edit-profil>
+            </div>
+        </p-tabPanel>
+        <p-tabPanel header="Compte">
+            <ng-template pTemplate = "header">
+                <i class="pi pi-cog"></i>
+                <span>Compte</span>
+            </ng-template>
+           <div class="p-row">
+               <div class="p-col">
+                   <label>Mot de passe actuel</label>
+                   <input type="password" class="p-ml-4" [(ngModel)]="changeVo.currentPassword" pInputText>
+               </div>
+           </div>
+            <div class="p-row">
+                <div class="p-col">
+                    <label>Nouveau Mot de passe </label>
+                    <input type="password" [(ngModel)]="changeVo.newPassword" pInputText>
+                </div>
+            </div>
+            <div class="p-row">
+                <div class="p-field p-col">
+                    <label>Confirmer Mot de passe </label>
+                    <input type="password" [(ngModel)]="changeVo.newPassword" pInputText>
+                </div>
+            </div>
+            <div class="p-row">
+                <button pButton pRipple type="button" label="Mise à jour"
+                    (click)="changePassword()" icon="pi pi-check" class="p-mr-2 p-mb-2" cl>
+                </button>
+            </div>
+        </p-tabPanel>
+    </p-tabView>
+</div>
+
+

@@ -1,0 +1,43 @@
+
+<p-dialog [(visible)]="createDialog" [style]="{width: '450px'}" header="Créer une nouvelle agence" [modal]="true" styleClass="p-fluid ">
+    <ng-template pTemplate="content" >
+        <div class="p-grid">
+            <div class="p-field p-sm-6">
+                <label >Code</label>
+                <input type="text" pInputText  [(ngModel)]="selected.code" required autofocus />
+                <small class="p-invalid" *ngIf="submitted && !selected.code">Code is required.</small>
+            </div>
+            <div class="p-field p-sm-6">
+                <label >Libelle</label>
+                <input type="text" pInputText  [(ngModel)]="selected.libelle" required autofocus />
+                <small class="p-invalid" *ngIf="submitted && !selected.libelle">libelle is required.</small>
+            </div>
+        </div>
+        <div class="p-grid">
+            <div class="p-field p-sm-6">
+                <label>Ville</label>
+                <p-dropdown [options]="itemsVille"   [(ngModel)]="selected.ville" placeholder="Select a City" optionLabel="libelle" [showClear]="true"></p-dropdown>
+            </div>
+            <div class="p-field p-sm-6">
+                <label>Chef Agence</label>
+                <p-dropdown [options]="itemsChef"   [(ngModel)]="selected.chefAgence" placeholder="Select a Chef" optionLabel="prenom" [showClear]="true"></p-dropdown>
+            </div>
+        </div>
+
+        <div class="p-grid">
+            <div class="p-field p-sm-6">
+                <label>Etat Agence:</label>
+                <div *ngFor="let etat of itemsEtat" class="p-field-checkbox">
+                    <p-radioButton [inputId]="etat.code" name="category" [value]="etat" [(ngModel)]="selected.etatAgence" [disabled]="etat.code === 'R'"></p-radioButton>
+                    <label [for]="etat.code">{{etat.libelle}}</label>
+                    <small class="p-invalid" *ngIf="submitted && !selected.etatAgence">etat demande conge is required.</small>
+                </div>
+            </div>
+        </div>
+
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-text" (click)="hideCreateDialog()"></button>
+        <button pButton pRipple label="Créer" icon="pi pi-check" class="p-button-text" (click)="save()"></button>
+    </ng-template>
+</p-dialog>

@@ -1,0 +1,54 @@
+<div class="p-grid">
+    <div class="p-col-12">
+
+        <p-toast></p-toast>
+
+        <div class="card">
+
+            <p-table #dt [value]="items" [columns]="cols" [rows]="7" [paginator]="true" [globalFilterFields]="['nom']"
+                     [rowHover]="true" dataKey="id"
+                     styleClass="p-datatable-customers"
+                     currentPageReportTemplate="Affichage de {first} à {last} sur {totalRecords} entrées" [showCurrentPageReport]="true">
+                <ng-template pTemplate="caption">
+                    <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
+                        <h5 class="p-m-0">Liste Des Collaborateurs Suivis</h5>
+                        <span class="p-input-icon-left">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text"  placeholder="Search..." />
+                    </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th pSortableColumn="nom" class="p-text-center">Collaborateur <p-sortIcon field="nom"></p-sortIcon></th>
+                        <th pSortableColumn="jourOuvr" class="p-text-center">Total des Jours Ouvrable <p-sortIcon field="jourOuvr"></p-sortIcon></th>
+                        <th pSortableColumn="jourTrava" class="p-text-center">Total des Jours Travaillé <p-sortIcon field="jourTrava"></p-sortIcon></th>
+                        <th pSortableColumn="jourConge" class="p-text-center">Total des Jours Congé <p-sortIcon field="jourConge"></p-sortIcon></th>
+                        <th pSortableColumn="jourRest" class="p-text-center">Total des Jours Restant <p-sortIcon field="jourRest"></p-sortIcon></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-selected>
+                    <tr *ngIf="selected.sommeJourDecalage == 0" style="background-color: #baf964">
+                        <td class="p-text-center">{{selected.collaborateur.nom}} {{selected.collaborateur.prenom}}</td>
+                        <td class="p-text-center">{{selected.sommeJourNonWeekEnd}}</td>
+                        <td class="p-text-center">{{selected.sommeJourTravail}}</td>
+                        <td class="p-text-center">{{selected.sommeJourConge}}</td>
+                        <td class="p-text-center">{{selected.sommeJourDecalage}}</td>
+                    </tr>
+                    <tr *ngIf="selected.sommeJourDecalage != 0" style="background-color: #fa988f">
+                        <td class="p-text-center">{{selected.collaborateur.nom}} {{selected.collaborateur.prenom}}</td>
+                        <td class="p-text-center">{{selected.sommeJourNonWeekEnd}}</td>
+                        <td class="p-text-center">{{selected.sommeJourTravail}}</td>
+                        <td class="p-text-center">{{selected.sommeJourConge}}</td>
+                        <td class="p-text-center">{{selected.sommeJourDecalage}}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="summary">
+                    <div class="p-d-flex p-ai-center p-jc-between">
+                        Au total, il y a {{items ? items.length : 0 }} éléments.
+                    </div>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div>

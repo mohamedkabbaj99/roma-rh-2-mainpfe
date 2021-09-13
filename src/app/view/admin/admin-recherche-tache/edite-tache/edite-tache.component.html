@@ -1,0 +1,60 @@
+<p-dialog [(visible)]="editDialog" [style]="{width: '450px'}" header="Modifier la tache" [modal]="true"
+          styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <div class="p-grid">
+            <div class="p-field p-sm-12">
+                    <label for="responsable">MembreEquipe</label>
+                    <p-dropdown id="responsable" [options]="itemsMembres" [showClear]="true"
+                                [(ngModel)]="selected.membreEquipe.id" (onChange)="selectMembre()" optionValue="id">
+                        <ng-template let-membreEquipe pTemplate="item">
+                            <div>{{membreEquipe.collaborateur.nom}} {{membreEquipe.collaborateur.prenom}}</div>
+                        </ng-template>
+                        <ng-template let-membreEquipe pTemplate="selectedItem">
+                            <div>{{itemsMembres[findSelectedMember(membreEquipe.id)].collaborateur.nom}}
+                                {{itemsMembres[findSelectedMember(membreEquipe.id)].collaborateur.prenom}}</div>
+                        </ng-template>
+                    </p-dropdown>
+            </div>
+        </div>
+        <div class="p-grid">
+            <div class="p-field p-sm-12">
+                <label for="datedemarre">Date Démarrage Effective</label>
+                <input type="date" pInputText id="datedemarre" [(ngModel)]="selected.dateDemarrageEffective"/>
+            </div>
+        </div>
+        <div class="p-grid">
+            <div class="p-field p-sm-12">
+                <label for="periode">Periode</label>
+                <p-dropdown id="periode" [options]="itemsPeriodes" [(ngModel)]="selected.periode"
+                            optionLabel="libelle"></p-dropdown>
+            </div>
+        </div>
+        <div class="p-field">
+            <label for="libelle">Libelle</label>
+            <input type="text" pInputText id="libelle" [(ngModel)]="selected.libelle"/>
+        </div>
+        <div class="p-grid">
+            <div class="p-field p-sm-12">
+                <label for="groupe">GroupeTache</label>
+                <p-dropdown id="groupe" [options]="groupesTache" [(ngModel)]="selected.groupeTache"
+                            optionLabel="libelle"></p-dropdown>
+            </div>
+        </div>
+        <div class="p-grid">
+            <div class="p-field p-sm-12">
+                <label for="categorie">CategorieTache</label>
+                <p-dropdown id="categorie" [options]="itemsCategories" [(ngModel)]="selected.categorieTache"
+                            optionLabel="libelle"></p-dropdown>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-text"
+                (click)="hideEditDialog()"></button>
+        <button pButton pRipple label="Mise à jour" icon="pi pi-check" class="p-button-text" (click)="edit()"></button>
+    </ng-template>
+</p-dialog>
+
+
+

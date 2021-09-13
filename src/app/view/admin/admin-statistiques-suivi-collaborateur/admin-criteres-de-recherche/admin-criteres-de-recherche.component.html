@@ -1,0 +1,28 @@
+<p-panel header="Critéres de recherche" [toggleable]="true">
+
+    <div class="p-fluid p-formgrid p-grid">
+        <div class="p-col"></div>
+        <div class="p-field p-col">
+            <label><span style="color: #027abc">Date Min:</span></label><br>
+            <p-calendar [showIcon]="true" inputId="icon" dateFormat="dd/mm/yy"
+                        [(ngModel)]="selected.dateDemarrageEffectiveMin"></p-calendar>
+        </div>
+        <div class="p-col"></div>
+        <div class="p-field p-col">
+            <label><span style="color: #027abc">Date Max:</span></label><br>
+            <p-calendar [showIcon]="true" inputId="icon" dateFormat="dd/mm/yy"
+                        [(ngModel)]="selected.dateDemarrageEffectiveMax"></p-calendar>
+        </div>
+        <div class="p-col"></div>
+        <div class="p-field p-col p-formgrid p-grid">
+            <div class="p-col">
+                <br>
+                <button pButton icon="pi pi-search" label="Rechercher" class="p-button-primary p-button-outlined"
+                        (click)="suivreCollaborateurs()"></button>
+            </div>
+            <div class="p-col"></div>
+
+        </div>
+    </div>
+
+</p-panel>

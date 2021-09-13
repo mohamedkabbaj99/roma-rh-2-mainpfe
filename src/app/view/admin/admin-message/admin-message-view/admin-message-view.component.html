@@ -1,0 +1,81 @@
+<p-dialog [(visible)]="viewDialog" [style]="{width: '950px'}" header="Les Détails " [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <div class="p-grid">
+            <div class="p-field p-sm-6">
+                <label for="objet">objet</label>
+                <input type="text" pInputText id="objet" [(ngModel)]="selected.objet" disabled />
+            </div>
+            <div class="p-field p-sm-6">
+                <label for="etatMessage">etat Message</label>
+                <input type="text" pInputText id="etatMessage" [(ngModel)]="selected.etatMessage.libelle" disabled />
+            </div>
+        </div>
+
+        <div class="p-grid">
+            <div class="p-field p-sm-6">
+                <label for="source">source</label>
+                <input type="text" pInputText id="source" [(ngModel)]="selected.source.login" disabled />
+            </div>
+            <div class="p-field p-sm-6">
+                <label >Date d'envoi</label>
+                <input type="text" pInputText id="dateenvoi" [(ngModel)]="selected.dateEnvoi" disabled />
+
+            </div>
+        </div>
+
+
+
+
+        <div class="p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="corps">corps</label>
+                <textarea id="corps" [rows]="5" [cols]="30" pInputTextarea autoResize="autoResize" [(ngModel)]="selected.corps" disabled>
+                </textarea>
+            </div>
+
+        </div>
+
+
+
+        <p-table #dt [value]="items" [columns]="cols" [rows]="4" [paginator]="true" [globalFilterFields]="['code','libelle','action']"
+                 [(selection)]="selectes" [rowHover]="true" dataKey="id"
+                 styleClass="p-datatable-customers"
+                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+            <ng-template pTemplate="caption">
+                <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
+                    <h5 class="p-m-0">Liste des messages details</h5>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width: 3rem">
+                        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                    </th>
+                    <th pSortableColumn="destinataire">Destinataires <p-sortIcon field="code"></p-sortIcon></th>
+                    <th pSortableColumn="etatMessage">Etat Message <p-sortIcon field="libelle"></p-sortIcon></th>
+
+
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-messageDetails>
+                <tr>
+                    <td>
+                        <p-tableCheckbox [value]="messageDetails"></p-tableCheckbox>
+                    </td>
+                    <td>{{messageDetails.distinataire.login}}</td>
+                    <td>{{messageDetails.etatMessage.libelle}}</td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="summary">
+                <div class="p-d-flex p-ai-center p-jc-between">
+                    In total there are {{items ? items.length : 0 }} items.
+                </div>
+            </ng-template>
+        </p-table>
+
+
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-text" (click)="hideViewDialog()"></button>
+    </ng-template>
+</p-dialog>

@@ -1,0 +1,25 @@
+
+<p-dialog [(visible)]="createDialog" [style]="{width: '450px'}" header=" Envoyer un message" [modal]="true" styleClass="p-fluid ">
+    <ng-template pTemplate="content" >
+        <div class="p-fluid">
+            <label>Distinataires</label>
+            <p-chips [(ngModel)]="distinataires" separator="," allowDuplicate="false"></p-chips>
+        </div>
+        <div class="p-fluid">
+            <label>Objet</label>
+            <textarea rows="2" cols="30" pInputTextarea autoResize="autoResize" [(ngModel)]="selected.objet"></textarea>
+        </div>
+
+        <div class="p-fluid">
+            <label>Corps</label>
+            <textarea rows="6" cols="30" pInputTextarea autoResize="autoResize" [(ngModel)]="selected.corps"></textarea>
+        </div>
+
+
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-text" (click)="hideCreateDialog()"></button>
+        <button pButton pRipple label="Envoyer" icon="pi pi-check" class="p-button-text" (click)="save()"></button>
+    </ng-template>
+</p-dialog>
+

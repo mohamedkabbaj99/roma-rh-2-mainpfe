@@ -1,0 +1,60 @@
+<div class="p-grid">
+    <div class="p-col-12">
+        <p-toast></p-toast>
+        <div class="card">
+
+
+            <p-table #dt [value]="items" [columns]="cols" [rows]="4" [paginator]="true" [globalFilterFields]="['dateDepart','dateFin','etatDemandeConfeLibelle','msgColl','action']"
+                     [(selection)]="selectes" [rowHover]="true" dataKey="id"
+                     styleClass="p-datatable-customers"
+                     currentPageReportTemplate="Affichage de  {first} à {last} sur {totalRecords} entrées" [showCurrentPageReport]="true">
+                <ng-template pTemplate="caption">
+                    <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
+                        <h5 class="p-m-0">Liste des messages recus</h5>
+                        <span   class="p-input-icon-left">
+                       <i class="pi pi-search" ></i>
+                        <input pInputText type="text"  placeholder="Rechercher..." />
+                    </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+                        <th pSortableColumn="collaborateur">Source <p-sortIcon field="collaborateur"></p-sortIcon></th>
+                        <th pSortableColumn="objet">Objet <p-sortIcon field="objet"></p-sortIcon></th>
+                        <th pSortableColumn="corps">Corps <p-sortIcon field="corps"></p-sortIcon></th>
+                        <th pSortableColumn="etatMessage">Etat Message <p-sortIcon field="etatMessage"></p-sortIcon></th>
+                        <th pSortableColumn="action">Actions<p-sortIcon field="action"></p-sortIcon></th>
+                        <th></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-messageDetail>
+                    <tr>
+                        <td>
+                            <p-tableCheckbox [value]="messageDetail"></p-tableCheckbox>
+                        </td>
+                        <td>{{messageDetail.message.source.nom}} {{messageDetail.message.source.prenom}}</td>
+                        <td>{{messageDetail.message.objet}}</td>
+                        <td>{{messageDetail.message.corps}}</td>
+                        <td>{{messageDetail.etatMessage.libelle}}</td>
+                        <!--    <td>{{messageDetail.source.nom}} {{messageDetail.source.prenom}}</td> -->
+
+                        <td>
+                            <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-info p-mr-2" (click)="view(messageDetail)"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="summary">
+                    <div class="p-d-flex p-ai-center p-jc-between">
+                        Au total il y a {{items ? items.length : 0 }} éléments.
+                    </div>
+                </ng-template>
+            </p-table>
+        </div>
+
+        <app-collaborateur-view-message-detail></app-collaborateur-view-message-detail>
+        <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+    </div>
+</div>
